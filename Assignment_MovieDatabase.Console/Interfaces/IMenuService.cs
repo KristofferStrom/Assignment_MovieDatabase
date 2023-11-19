@@ -4,5 +4,6 @@
     {
         void Menu();
         void AddMenu();
+        void ListAllMenu();
     }
 }

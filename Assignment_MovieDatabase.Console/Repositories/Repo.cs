@@ -63,5 +63,32 @@ namespace Assignment_MovieDatabase.Console.Repositories
 
             return null!;
         }
+
+
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            try
+            {
+                _context.Set<TEntity>().Update(entity);
+                await _context.SaveChangesAsync();
+
+                return entity;
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
+            return null!;
+        }
+
+        public virtual async Task<bool> Exists(Expression<Func<TEntity, bool>> predicate)
+        {
+            try
+            {
+                return await _context.Set<TEntity>().AnyAsync(predicate);
+            }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
+            return false!;
+        }
+
     }
 }
